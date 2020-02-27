@@ -3,6 +3,7 @@
 <head>
     {% block head %}
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Home Page - CN{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -19,7 +20,10 @@
         {% block custom %}
             <style>
                 body {
-                    padding-top: 50px;
+                    padding-top: 70px;
+                    padding-bottom: 60px;
+                    font-family:"Helvetica Neue", "Arial", "sans-serif";
+
                     min-height: 100%;
                     background-image: url("../static/images/background.jpg");
                     background-size: cover;
@@ -69,13 +73,13 @@
                     <a class="nav-link" href="">HOW CAN I MAKE YOUR DAY?</a> <!-- Add link -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">PROJECTS</a> <!-- Add link -->
+                    <a class="nav-link" href="/project">PROJECTS</a> <!-- Add link -->
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="">MEDIA</a> <!-- Add link -->
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="">ABOUT</a> <!-- Add link -->
+                    <a class="nav-link" href="/about">ABOUT</a> <!-- Add link -->
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="/contact">CONTACT ME</a> <!-- Add link -->
