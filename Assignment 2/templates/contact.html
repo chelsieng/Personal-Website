@@ -1,0 +1,25 @@
+{% extends "home.html" %}
+{% block title %} Contact Me - CN {% endblock %}
+{% block content %}
+    <img class="img-responsive mx-auto d-block" src="../static/images/contact-128.png">
+    <br>
+    <div class="container-md mx-auto d-block">
+        <form class="form-responsive">
+            <div class="row">
+                <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required>
+            </div>
+            <div class="row">
+                <input type="text" class="form-control" id="email" placeholder="Enter email" name="email" required>
+            </div>
+            <div class="row">
+                <textarea class="form-control" rows="10" id="message" placeholder="Enter message" name="message"
+                          required></textarea>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-dark mx-auto d-block"> Send</button>
+        </form>
+    </div>
+
+{% endblock %}
+
+
