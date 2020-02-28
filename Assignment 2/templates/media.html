@@ -1,0 +1,72 @@
+{% extends "home.html" %}
+{% block title %} Media - CN {% endblock %}
+{% block content %}
+    <div class="container pt-4 container-lg mx-auto d-block">
+        <div class="display-3 text-center"><img class="img-responsive" src="/static/images/media.png"> Albums</div>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link text-dark lead" data-toggle="tab" href="#photos">Photos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark lead" data-toggle="tab" href="#videos">Videos</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane container fade" id="photos">
+                <div class="table-responsive-lg">
+                    <table class="table">
+                        <tr>
+                            <td><a href="/static/images/IMG_7262.JPG"><img class="img-fluid img-thumbnail"
+                                                                           src="/static/images/IMG_7262.JPG"></a></td>
+                            <td><a href="/static/images/IMG_7262.JPG"><img class="img-fluid img-thumbnail"
+                                                                           src="/static/images/IMG_7262.JPG"></a></td>
+                            <td><a href="/static/images/IMG_7262.JPG"><img class="img-fluid img-thumbnail"
+                                                                           src="/static/images/IMG_7262.JPG"></a></td>
+                        </tr>
+                        <tr>
+                            <td>Pic 4</td>
+                            <td>Pic 5</td>
+                            <td>Pic 6</td>
+                        </tr>
+                        <tr>
+                            <td>Pic 7</td>
+                            <td>Pic 8</td>
+                            <td>Pic 9</td>
+                        </tr>
+                        <tr>
+                            <td>Pic 10</td>
+                            <td>Pic 11</td>
+                            <td>Pic 12</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane container fade" id="videos">
+                <div class="table-responsive-lg">
+                    <table class="table">
+                        <tr>
+                            <td>Vid 1</td>
+                            <td>Vid 2</td>
+                            <td>Vid 3</td>
+                        </tr>
+                        <tr>
+                            <td>Vid 4</td>
+                            <td>Vid 5</td>
+                            <td>Vid 6</td>
+                        </tr>
+                        <tr>
+                            <td>Vid 7</td>
+                            <td>Vid 8</td>
+                            <td>Vid 9</td>
+                        </tr>
+                        <tr>
+                            <td>Vid 10</td>
+                            <td>Vid 11</td>
+                            <td>Vid 12</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
