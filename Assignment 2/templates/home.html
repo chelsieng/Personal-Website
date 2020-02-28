@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Home Page - CN{% endblock %}</title>
+        {#        <link rel="icon" href="https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-512.png">#}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
               crossorigin="anonymous">
@@ -20,11 +21,9 @@
         {% block custom %}
             <style>
                 body {
-                    padding-top: 70px;
-                    padding-bottom: 60px;
-                    font-family:"Helvetica Neue", "Arial", "sans-serif";
-
-                    min-height: 100%;
+                    padding-top: 5%;
+                    padding-bottom: 5%;
+                    font-family: "Helvetica Neue", "Arial", "sans-serif";
                     background-image: url("../static/images/background.jpg");
                     background-size: cover;
                 }
@@ -62,7 +61,7 @@
 </head>
 <body>
 {% block navbarHeader %}
-    <nav class="navbar navbar-expand-md fixed-top">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <a class="navbar-brand text-align-center " href="/home">「 𝐂 𝐇 𝐄 𝐋 𝐒 𝐈 𝐄 」</a> <!-- Add image -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"><img src="../static/images/Toggler.png"></span>
@@ -90,10 +89,15 @@
 {% endblock %}
 
 {% block content %}
+    <div class="table-responsive">
+        <table class="table-bordered">
+
+        </table>
+    </div>
 {% endblock %}
 
 {% block navbarFooter %}
-    <nav class="navbar fixed-bottom navbar-expand-md">
+    <nav class="navbar fixed-bottom navbar-expand-xs navbar-expand-sm avbar-expand-md navbar-expand-lg">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbarBottom">
             <span class="navbar-toggler-icon"><img src="../static/images/follow.png"></span>
         </button>
