@@ -29,5 +29,10 @@ def media():
     return render_template("media.html")
 
 
+@app.route('/makeYourDay')
+def makeYourDay():
+    return render_template("makeYourDay.html")
+
+
 if __name__ == '__main__':
     app.run(host='192.168.0.107', port=5000, debug=True)
