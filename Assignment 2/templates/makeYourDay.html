@@ -1,12 +1,12 @@
 {% extends "home.html" %}
 {% block title %} Contact Me - CN {% endblock %}
 {% block content %}
-    <div class="container pt-4 container-lg mx-auto d-block">
+    <div class="container py-5 container-lg mx-auto d-block">
         <div class="display-3 text-center"><img class="img-responsive" src="/static/images/quotes.png"> Mood
         </div>
         <ul class="nav nav-tabs nav-justified">
             <li class="nav-item ">
-                <a class="nav-link text-dark lead" data-toggle="tab" href="#mind">What's on your mind?</a>
+                <a class="nav-link active text-dark lead" data-toggle="tab" href="#mind">What's on your mind?</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-dark lead" data-toggle="tab" href="#soul">Soul Feeder</a>
@@ -16,30 +16,75 @@
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane container fade" id="mind">
+            <div class="tab-pane bg-white fade show active" id="mind">
                 <div class="media border p-3">
                     <img src="/static/images/anonymous.png" alt="John Doe" class="mr-3 mt-2 ">
                     <div class="media-body">
                         <h5>Anonymous</h5>
                         <form>
-                            <div class="row">
-                                <textarea class="form-control" rows="5" id="write" placeholder="Write something"
+                            <div class="container">
+                                <textarea class="form-control bg-light" rows="5" id="write"
+                                          placeholder="Write something"
                                           name="write"
                                           required></textarea>
+                                <button type="submit" class="btn btn-dark">Post</button>
                             </div>
-                            <button type="submit" class="btn btn-light">Post</button>
                         </form>
                     </div>
                 </div>
                 <div class="media border p-3">
                     <img src="/static/images/user.png" alt="John Doe" class="mr-3 mt-3">
                     <div class="media-body">
-                        <h4><small><i>Posted on some month/day/year</i></small></h4>
-                        <p>some text. some text. some text.</p>
+                        <h4 class="lead">Posted on February 28, 2020</h4>
+                        <div class="container rounded bg-light">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                            ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                            ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                            in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                            laborum.
+                        </div>
+                    </div>
+                </div>
+                <div class="media border p-3">
+                    <img src="/static/images/user.png" alt="John Doe" class="mr-3 mt-3">
+                    <div class="media-body">
+                        <h4 class="lead">Posted on December 18, 2019</h4>
+                        <div class="container rounded bg-light">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                            ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                            ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                            in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                            laborum.
+                        </div>
+                    </div>
+                </div>
+                <div class="media border p-3">
+                    <img src="/static/images/user.png" alt="John Doe" class="mr-3 mt-3">
+                    <div class="media-body">
+                        <h4 class="lead">Posted on December 11, 2019</h4>
+                        <div class="container rounded bg-light">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                            ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                            ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                            in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                            laborum.
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane container fade" id="soul">
+            <div class="tab-pane bg-white fade" id="soul">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Keep going</h4>
@@ -53,13 +98,18 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Title</h4>
-                        <p class="card-text lead">some text. some text. some text.</p>
+                        <h4 class="card-title">Lorem ipsum</h4>
+                        <p class="card-text lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+                            anim id est laborum.</p>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane container fade" id="mademe">
-                <div class="container-lg mx-auto d-block bg-light">
+            <div class="tab-pane bg-white fade" id="mademe">
+                <div class="container-lg bg-white mx-auto d-block bg-light">
                     <p class="lead text-justify text-center">Tribute to All Broken Souls</p>
                     <p class="lead text-justify">Dear reader, my sincere greetings. Today I am about to show you a side
                         I have always hidden. Why now? Simply because sometimes people write what they cannot say.
