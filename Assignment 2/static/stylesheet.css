@@ -1,0 +1,37 @@
+body {
+    padding-top: 5%;
+    padding-bottom: 5%;
+    background-image: url("../static/images/background.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.navbar {
+    background: linear-gradient(to top right, #FF6037 0%, #FFCC33 100%);
+}
+
+.navbar-brand {
+    color: white;
+    font-family: "Avenir Next", "Helvetica Neue", "Verdana";
+}
+
+.nav-link {
+    color: white;
+    font-family: "Avenir Next", "Helvetica Neue", "Verdana";
+}
+
+.nav-item:hover .nav-link {
+    color: #736A62;
+    /*color: black;*/
+}
+
+.navbar-brand:hover {
+    /*color: black;*/
+    color: #736A62;
+}
+
+.navbar-toggler-icon {
+    color: black;
+}
