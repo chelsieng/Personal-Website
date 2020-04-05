@@ -4,7 +4,7 @@
     <div class="container-lg pt-3 pb-5 mx-auto d-block">
         <img class="img-responsive mx-auto d-block" src="/static/images/contact-128.png">
         <div class="text-center display-4">Contact Me</div>
-        <form class="form-responsive">
+        <form class="form-responsive" action="#" method="post">
             <div class="row">
                 <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required>
             </div>
@@ -16,11 +16,9 @@
                           required></textarea>
             </div>
             <br>
-            <button type="submit" class="btn btn-dark mx-auto d-block"> Send</button>
+            <button type="submit" value="submit" class="btn btn-dark mx-auto d-block"> Send</button>
         </form>
     </div>
-
-
 {% endblock %}
 
 
