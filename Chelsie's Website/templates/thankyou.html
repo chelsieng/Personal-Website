@@ -6,21 +6,21 @@
         </div>
         <br>
         <div class="container-lg mx-auto d-block bg-white">
-            <div class="text-center display-4">Thank you {{ name }} for your message!</div>
+            <h1 class="text-center font-weight-light">Thank you <span style="text-transform: capitalize">{{ name }}</span> for your message!</h1>
             <br>
             <div class="table-responsive-lg">
                 <table class="table table-hover">
                     <tr>
                         <th>
-                            <div class="lead text-justify">Email</div>
+                            <div class="lead">Email</div>
                         </th>
                         <td>
-                            <div class="lead text-justify">Message</div>
+                            <div class="lead">Message</div>
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            <div class="lead text-justify">{{ email }}</div>
+                            <div class="lead">{{ email }}</div>
                         </th>
                         <td>
                             <div class="lead text-justify">{{ message }}</div>
@@ -28,7 +28,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="text-center display-4">I will contact you shortly.</div>
+            <h1 class="text-center font-weight-light">I will contact you shortly.</h1>
 
         </div>
     </div>

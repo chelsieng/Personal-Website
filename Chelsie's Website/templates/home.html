@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Home Page - CN{% endblock %}</title>
         {#        <link rel="icon" href="https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-512.png">#}
+            <script type="text/javascript" src="{{ url_for('static', filename='validation.js') }}"></script>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename ='stylesheet.css') }}">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -36,7 +37,7 @@
     <nav class="navbar navbar-expand-lg fixed-top">
         <a class="navbar-brand text-align-center " href="/home">「 𝐂 𝐇 𝐄 𝐋 𝐒 𝐈 𝐄 」</a> <!-- Add image -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"><img src="../static/images/Toggler.png"></span>
+            <span class="navbar-toggler-icon"><img src="/static/images/Toggler.png"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav nav-fill w-100">
@@ -83,32 +84,32 @@
 {% block navbarFooter %}
     <nav class="navbar fixed-bottom navbar-expand-xs navbar-expand-sm avbar-expand-md navbar-expand-lg">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbarBottom">
-            <span class="navbar-toggler-icon"><img src="../static/images/follow.png"></span>
+            <span class="navbar-toggler-icon"><img src="/static/images/follow.png"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbarBottom">
             <ul class="navbar-nav nav-fill w-100">
                 <li class="nav-item">
                     <a class="nav-link" href="https://www.facebook.com/chelsiengmk" target="_blank"><img
-                            src="../static/images/Facebook-32.png"></a>
+                            src="/static/images/Facebook-32.png"></a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link"
                        href="https://www.instagram.com/chel_ng/?fbclid=IwAR0Fir7duKbFgQ1Ne8_3P5fm92nplsnySSaMkQZbupffu3iQTr_P_W2HbCg"
-                       target="_blank"><img src="../static/images/Insta-32.png"></a>
+                       target="_blank"><img src="/static/images/Insta-32.png"></a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="https://www.linkedin.com/in/chelsie-ng-6724b5184/"
                        target="_blank"><img
-                            src="../static/images/LinkedIn-32.png"></a>
+                            src="/static/images/LinkedIn-32.png"></a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="https://www.youtube.com/channel/UCWDwyhsHn5Yr-XiPDfWM4lQ"
                        target="_blank"><img
-                            src="../static/images/Youtube-32.png"></a>
+                            src="/static/images/Youtube-32.png"></a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="https://www.snapchat.com/add/chel_ng" target="_blank"><img
-                            src="../static/images/Snapchat-32.png"></a>
+                            src="/static/images/Snapchat-32.png"></a>
                 </li>
             </ul>
         </div>
