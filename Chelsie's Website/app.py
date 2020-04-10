@@ -25,6 +25,11 @@ def home():
     return render_template("home.html")
 
 
+@app.route('/learnmoreaboutme')
+def moreAboutMe():
+    return render_template("LearnMoreAboutMe.html")
+
+
 @app.route('/contact', methods=["POST", "GET"])
 def contact():
     if request.method == "POST":
@@ -41,9 +46,6 @@ def contact():
     else:
         return render_template("contact.html")
 
-@app.route('/view')
-def view():
-    return render_template("view.html", values=contact_info.query.all())
 
 @app.route('/contact/thankyou/<name>/<email>/<message>')
 def thankyou(name, email, message):
@@ -68,6 +70,11 @@ def media():
 @app.route('/makeyourday')
 def makeYourDay():
     return render_template("makeYourDay.html")
+
+
+@app.route('/view')
+def view():
+    return render_template("view.html", values=contact_info.query.all())
 
 
 if __name__ == '__main__':

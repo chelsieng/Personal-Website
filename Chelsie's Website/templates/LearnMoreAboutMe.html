@@ -1,0 +1,122 @@
+{% extends "home.html" %}
+{% block title %} More About Me - CN {% endblock %}
+{% block content %}
+    <div class="container py-5 container-lg mx-auto d-block">
+        <h1 class="font-weight-lighter text-reset text-center "><span class="badge badge-light"><i
+                class="fas fa-download"></i>
+            Download Resume</span></h1>
+        <ul class="nav nav-tabs nav-justified">
+            <li class="nav-item">
+                <a class="nav-link active text-dark lead" data-toggle="tab" href="#education">Education</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark lead" data-toggle="tab" href="#work">Work Experience</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane bg-white fade show active" id="education">
+                <div class="media border p-3">
+                    <img src="/static/images/user.png" class="mr-3 mt-3">
+                    <div class="media-body">
+                        <h4 class="lead">Concordia University</h4>
+                        <div class="container rounded bg-light">
+                            <p>Bachelor of Computer Science - General Program Co-op</p>
+                            <ul>
+                                <li>Member of the Institute for Co-operative Education</li>
+                                <li>Concordia Dean's List 2018-2019</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="media border p-3">
+                    <img src="/static/images/user.png" class="mr-3 mt-3">
+                    <div class="media-body">
+                        <h4 class="lead">Lower Canada College</h4>
+                        <div class="container rounded bg-light">
+                            <p>Pre-University Diploma</p>
+                            <ul>
+                                <li>Graduated with Honours</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="media border p-3">
+                    <img src="/static/images/user.png" class="mr-3 mt-3">
+                    <div class="media-body">
+                        <h4 class="lead">Ebene State Secondary School</h4>
+                        <div class="container rounded bg-light">
+                            <p>Cambridge O Level</p>
+                            <ul>
+                                <li>Aggregate 13</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane bg-white gitfade" id="work">
+                <div class="media border p-3">
+                    <img src="/static/images/user.png" class="mr-3 mt-3">
+                    <div class="media-body">
+                        <h4 class="lead">TD Auto Finance</h4>
+                        <div class="container rounded bg-light">
+                            <p>Customer Service Officer</p>
+                            <ul>
+                                <li>Answer around 65 inbound queued up calls during a workday</li>
+                                <li>Administer active auto loans profile</li>
+                                <li>Action customer requests such as making payments, scheduling arrangements or sending
+                                    statement letters
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="media border p-3">
+                    <img src="/static/images/user.png" class="mr-3 mt-3">
+                    <div class="media-body">
+                        <h4 class="lead">Exo</h4>
+                        <div class="container rounded bg-light">
+                            <p>Customer Service Agent</p>
+                            <ul>
+                                <li>Coordinated train terminals</li>
+                                <li>Directed passengers to terminal</li>
+                                <li>Assisted in customer needs such as answering questions, buying or validating
+                                    tickets
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="media border p-3">
+                    <img src="/static/images/user.png" class="mr-3 mt-3">
+                    <div class="media-body">
+                        <h4 class="lead">Wize</h4>
+                        <div class="container rounded bg-light">
+                            <p>Class Representative</p>
+                            <ul>
+                                <li>Provided feedback to prep courses enrolled in</li>
+                                <li>Uploaded course materials to Google Drive on a weekly basis
+                                </li>
+                                <li>Corresponded with Wize Prof through emails to answer questions
+                                </li>
+                                <li>Promoted Wize through social media or word of mouth</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="media border p-3">
+                    <img src="/static/images/user.png" class="mr-3 mt-3">
+                    <div class="media-body">
+                        <h4 class="lead">YMCA</h4>
+                        <div class="container rounded bg-light">
+                            <p>Volunteer Tutor</p>
+                            <ul>
+                                <li>Taught mathematics to 16-year-old youths twice a week</li>
+                                <li>Guided them through homework and instant problem-solving questions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
