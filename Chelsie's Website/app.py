@@ -27,7 +27,7 @@ def home():
 
 @app.route('/learnmoreaboutme')
 def moreAboutMe():
-    return render_template("LearnMoreAboutMe.html")
+    return render_template("learnMoreAboutMe.html")
 
 
 @app.route('/contact', methods=["POST", "GET"])
