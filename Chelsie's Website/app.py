@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data/contact.sqlite3'
+app.secret_key = "hello"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data/Database.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
@@ -17,6 +18,16 @@ class contact_info(db.Model):
         self.name = name
         self.email = email
         self.message = message
+
+
+class user_info(db.Model):
+    _id = db.Column("id", db.Integer, primary_key=True)
+    username = db.Column("Username", db.String)
+    password = db.Column("Password", db.String)
+
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
 
 
 @app.route('/home')
@@ -72,9 +83,32 @@ def makeYourDay():
     return render_template("makeYourDay.html")
 
 
+@app.route('/login', methods=["POST", "GET"])
+def logIn():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        session["username"] = username
+        print(user_info.query.all())
+
+        users = user_info.query.all()
+        for user in users:
+            print(user.username)
+
+        #     if same name and same pw  create session sinon error message
+
+        log_user = user_info(username, password)
+        db.session.add(log_user)
+        db.session.commit()
+
+        if "username" in session:
+            flash("You have been logged in!")
+    return render_template("logUser.html")
+
+
 @app.route('/view')
 def view():
-    return render_template("view.html", values=contact_info.query.all())
+    return render_template("view.html", values=user_info.query.all())
 
 
 if __name__ == '__main__':

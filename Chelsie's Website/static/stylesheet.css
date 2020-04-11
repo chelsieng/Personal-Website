@@ -23,13 +23,11 @@ body {
 }
 
 .nav-item:hover .nav-link {
-    color: #736A62;
-    /*color: black;*/
+    color: #353839;
 }
 
 .navbar-brand:hover {
-    /*color: black;*/
-    color: #736A62;
+    color: #353839;
 }
 
 .navbar-toggler-icon {

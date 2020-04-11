@@ -1,0 +1,31 @@
+{% extends "home.html" %}
+{% block title %} Log In - CN {% endblock %}
+{% block content %}
+    <div class="container py-5 container-lg mx-auto d-block">
+        <div class="display-3 text-center"><img class="img-responsive" src="/static/images/login.png"> Log In</div>
+        <br>
+        <div class="container-lg mx-auto d-block">
+            <form class="form-responsive" action="#" method="post">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    <input type="text" class="form-control" id="usernam" placeholder="Username" name="username"
+                           required>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        </div>
+                        <input type="password" class="form-control" id="password" placeholder="Password" name="password"
+                               required>
+                    </div>
+
+                    <button type="submit" id="submitLogIn" value="submit" class="btn btn-dark mx-auto d-block"> Log In
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}
