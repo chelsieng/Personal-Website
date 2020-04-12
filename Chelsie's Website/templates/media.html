@@ -2,84 +2,54 @@
 {% block title %} Media - CN {% endblock %}
 {% block content %}
     <div class="container py-5 container-lg mx-auto d-block">
-        <div class="display-3 text-center"><img class="img-responsive" src="/static/images/media.png"> Albums</div>
+        <div class="display-3 text-center"><img class="img-responsive" src="/static/images/media.png"> Media</div>
         <ul class="nav nav-tabs nav-justified">
             <li class="nav-item">
-                <a class="nav-link active text-dark lead" data-toggle="tab" href="#photos">Photos</a>
+                <a class="nav-link active text-dark lead" data-toggle="tab" href="#photos">Instagram Photos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-dark lead" data-toggle="tab" href="#videos">Videos</a>
+                <a class="nav-link text-dark lead" data-toggle="tab" href="#videos">Facebook Videos</a>
             </li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane bg-white fade show active" id="photos">
-                <div class="table-responsive-lg">
-                    <table class="table">
-                        <tr>
-                            <td><a href="/static/images/IMG_7262.JPG"><img class="img-fluid img-thumbnail"
-                                                                           src="/static/images/IMG_7262.JPG"></a></td>
-                            <td><a href="/static/images/IMG_7262.JPG"><img class="img-fluid img-thumbnail"
-                                                                           src="/static/images/IMG_7262.JPG"></a></td>
-                            <td><a href="/static/images/IMG_7262.JPG"><img class="img-fluid img-thumbnail"
-                                                                           src="/static/images/IMG_7262.JPG"></a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/static/images/IMG_7262.JPG"><img class="img-fluid img-thumbnail"
-                                                                           src="/static/images/IMG_7260.JPG"></a></td>
-                            <td><a href="/static/images/IMG_7262.JPG"><img class="img-fluid img-thumbnail"
-                                                                           src="/static/images/IMG_7260.JPG"></a></td>
-                            <td><a href="/static/images/IMG_7262.JPG"><img class="img-fluid img-thumbnail"
-                                                                           src="/static/images/IMG_7260.JPG"></a></td>
-                        </tr>
-                        <tr>
-                            <td>Pic 7</td>
-                            <td>Pic 8</td>
-                            <td>Pic 9</td>
-                        </tr>
-                        <tr>
-                            <td>Pic 10</td>
-                            <td>Pic 11</td>
-                            <td>Pic 12</td>
-                        </tr>
-                    </table>
-                </div>
+                <div id="instafeed"></div>
             </div>
             <div class="tab-pane bg-white gitfade" id="videos">
-                <div class="table-responsive-lg">
-                    <table class="table">
-                        <tr>
-                            <td>
-                                <object class="embed-responsive " width="315" height="315"
-                                        data="https://www.youtube.com/embed/U86RzKvOUxc">
-                                </object>
-                            </td>
-                            <td>
-                                <object class="embed-responsive " width="315" height="315"
-                                        data="https://www.youtube.com/embed/U86RzKvOUxc">
-                                </object>
-                            </td>
-                            <td>
-                                <object class="embed-responsive " width="315" height="315"
-                                        data="https://www.youtube.com/embed/U86RzKvOUxc">
-                                </object>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Vid 4</td>
-                            <td>Vid 5</td>
-                            <td>Vid 6</td>
-                        </tr>
-                        <tr>
-                            <td>Vid 7</td>
-                            <td>Vid 8</td>
-                            <td>Vid 9</td>
-                        </tr>
-                        <tr>
-                            <td>Vid 10</td>
-                            <td>Vid 11</td>
-                            <td>Vid 12</td>
-                        </tr>
-                    </table>
+                <div class="container container-sm container-md container-lg">
+                    <div id="fb-root"></div>
+                    <script async defer crossorigin="anonymous"
+                            src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0&appId=216701929430972&autoLogAppEvents=1"></script>
+                    <div class="fb-video"
+                         data-href="https://www.facebook.com/chelsiengmk/videos/vb.100001783119262/984669904935771/?type=3"
+                         data-width="1080" data-show-text="true">
+                        <blockquote cite="https://developers.facebook.com/chelsiengmk/videos/984669904935771/"
+                                    class="fb-xfbml-parse-ignore"><a
+                                href="https://developers.facebook.com/chelsiengmk/videos/984669904935771/">Chinese Dance
+                            2016</a>
+                            <p>-You exist in my song- 🙈</p>Posted by <a href="https://www.facebook.com/chelsiengmk">Chelsie
+                                Ng</a> on Tuesday, May 24, 2016
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="container container-sm container-md container-lg">
+                    <div id="fb-root"></div>
+                    <script async defer crossorigin="anonymous"
+                            src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0&appId=216701929430972&autoLogAppEvents=1"></script>
+                    <div class="fb-video"
+                         data-href="https://www.facebook.com/chelsiengmk/videos/vb.100001783119262/972790726123689/?type=3"
+                         data-width="1080" data-show-text="true">
+                        <blockquote cite="https://developers.facebook.com/chelsiengmk/videos/972790726123689/"
+                                    class="fb-xfbml-parse-ignore"><a
+                                href="https://developers.facebook.com/chelsiengmk/videos/972790726123689/"></a>
+                            <p>In the end we didn&#039;t realize we were making memories, we just knew we were having
+                                fun 🙈
+
+                                Thanks everyone for contributing in this &#039;little piece of art&#039; 😏✌🏼️
+                                We nailed it! Yellow+Green ftw!🔥</p>Posted by <a
+                                    href="https://www.facebook.com/chelsiengmk">Chelsie Ng</a> on Monday, May 2, 2016
+                        </blockquote>
+                    </div>
                 </div>
             </div>
         </div>

@@ -5,26 +5,42 @@
         <div class="display-3 text-center"><img class="img-responsive" src="/static/images/login.png"> Log In</div>
         <br>
         <div class="container-lg mx-auto d-block">
-            <form class="form-responsive" action="#" method="post">
+            <form class="form-responsive" method="post">
+                        {{ form.hidden_tag() }}
+{#                {{ form.hidden_tag }}#}
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                     </div>
-                    <input type="text" class="form-control" id="usernam" placeholder="Username" name="username"
-                           required>
+{#                    {{ form.username }} <br>#}
+                    {{ form.username(size=32, class="form-control", placeholder="Username") }}
 
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                         </div>
-                        <input type="password" class="form-control" id="password" placeholder="Password" name="password"
-                               required>
-                    </div>
+{#                        <input type="password" class="form-control" id="password" placeholder="Password" name="password"#}
+{#                               required>#}
+                        {{ form.password(size=32, class="form-control", placeholder="Password") }}
 
-                    <button type="submit" id="submitLogIn" value="submit" class="btn btn-dark mx-auto d-block"> Log In
-                    </button>
+                    </div>
+                    {{ form.submit(id="submitLogin",class="btn btn-dark mx-auto d-block", value="Log In") }}
+{#                    <button type="submit" id="submitLogIn" value="submit" class="btn btn-dark mx-auto d-block"> Log In#}
+{#                    </button>#}
                 </div>
             </form>
+{#            <form action="" method="post" novalidate>#}
+{#        {{ form.hidden_tag() }}#}
+{#        <p>#}
+{#            {{ form.username.label }}<br>#}
+{#            {{ form.username(size=32) }}#}
+{#        </p>#}
+{#        <p>#}
+{#            {{ form.password.label }}<br>#}
+{#            {{ form.password(size=32) }}#}
+{#        </p>#}
+{#        <p>{{ form.submit() }}</p>#}
+{#    </form>#}
 
         </div>
     </div>

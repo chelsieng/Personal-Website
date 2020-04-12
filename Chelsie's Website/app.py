@@ -1,14 +1,23 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import InputRequired
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.secret_key = "hello"
+app.secret_key = "Q5Y5tM4G8vDHav7z"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data/Database.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
 
-class contact_info(db.Model):
+class LoginForm(FlaskForm):
+    username = StringField('username', validators=[InputRequired()])
+    password = PasswordField('password', validators=[InputRequired()])
+    submit = SubmitField('Sign In')
+
+
+class ContactInfo(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
     name = db.Column("Name", db.String)
     email = db.Column("Email", db.String)
@@ -20,7 +29,7 @@ class contact_info(db.Model):
         self.message = message
 
 
-class user_info(db.Model):
+class UserInfo(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
     username = db.Column("Username", db.String)
     password = db.Column("Password", db.String)
@@ -48,7 +57,7 @@ def contact():
         email = request.form["email"]
         message = request.form["message"]
 
-        user = contact_info(name, email, message)
+        user = ContactInfo(name, email, message)
         db.session.add(user)
         db.session.commit()
 
@@ -85,30 +94,46 @@ def makeYourDay():
 
 @app.route('/login', methods=["POST", "GET"])
 def logIn():
+    form = LoginForm()
+    # if form.validate_on_submit():
+    #     log_user = UserInfo(username=form.username.data, password=form.username.data)
+    #     db.session.add(log_user)
+    #     db.session.commit()
+    #     return flash("User has been created")
     if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
-        session["username"] = username
-        print(user_info.query.all())
+        if form.validate_on_submit():
+            username = request.form["username"]
+            password = request.form["password"]
+            user = UserInfo.query.filter_by(username=username).first()
+            if user and user.password == password:
+                flash('Login requested for user {}'.format(form.username.data))
+                return redirect('/home')
 
-        users = user_info.query.all()
-        for user in users:
-            print(user.username)
+    # if request.method == "POST":
+    #     username = request.form["username"]
+    #     password = request.form["password"]
+    #     session["username"] = username
+    #     print(UserInfo.query.all())
+    #
+    #     users = UserInfo.query.all()
+    #     for user in users:
+    #         print(user.username)
+    #
+    #     #     if same name and same pw  create session sinon error message
+    #
+    #     log_user = UserInfo(username, password)
+    #     db.session.add(log_user)
+    #     db.session.commit()
 
-        #     if same name and same pw  create session sinon error message
+    # if "username" in session:
+    #     flash("You have been logged in!")
 
-        log_user = user_info(username, password)
-        db.session.add(log_user)
-        db.session.commit()
-
-        if "username" in session:
-            flash("You have been logged in!")
-    return render_template("logUser.html")
+    return render_template("logUser.html", form=form, message="Log in ")
 
 
 @app.route('/view')
 def view():
-    return render_template("view.html", values=user_info.query.all())
+    return render_template("view.html", values=UserInfo.query.all())
 
 
 if __name__ == '__main__':
