@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, get_flashed_messages
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import InputRequired
@@ -110,55 +110,38 @@ def makeYourDay():
 @app.route('/login', methods=["POST", "GET"])
 def logIn():
     form = LoginForm()
-    # if form.validate_on_submit():
-    #     log_user = UserInfo(username=form.username.data, password=form.username.data)
-    #     db.session.add(log_user)
-    #     db.session.commit()
-    #     return flash("User has been created")
     if request.method == "POST":
         if form.validate_on_submit():
             username = request.form["username"]
             password = request.form["password"]
             user = UserInfo.query.filter_by(username=username).first()
             if user and user.password == password:
-                flash('Login requested for user {}'.format(form.username.data))
                 return redirect('/home')
-
-    # if request.method == "POST":
-    #     username = request.form["username"]
-    #     password = request.form["password"]
-    #     session["username"] = username
-    #     print(UserInfo.query.all())
-    #
-    #     users = UserInfo.query.all()
-    #     for user in users:
-    #         print(user.username)
-    #
-    #     #     if same name and same pw  create session sinon error message
-    #
-    #     log_user = UserInfo(username, password)
-    #     db.session.add(log_user)
-    #     db.session.commit()
-
-    # if "username" in session:
-    #     flash("You have been logged in!")
-
+            else:
+                flash('Log in unsuccessful!', 'red')
     return render_template("login.html", form=form)
 
 
-@app.route('/signup')
+@app.route('/signup', methods=["POST", "GET"])
 def signup():
     form = SignUpForm()
     if request.method == "POST":
         if form.validate_on_submit():
             signup_username = request.form["signup_username"]
-            signup_password = request.form["signup_password"]
-            signup_confirm_password = request.form["signup_confirm"]
-            log_user = UserInfo(signup_username, signup_password)
-            db.session.add(log_user)
-            db.session.commit()
-
-    return render_template("signUp.html", form=form)
+            signup_confirm_password = request.form["signup_password"]
+            signup_user = UserInfo.query.filter_by(username=signup_username).first()
+            print(signup_user)
+            if signup_user is None:
+                log_user = UserInfo(signup_username, signup_confirm_password)
+                db.session.add(log_user)
+                db.session.commit()
+                flash('Successfully signed up!', 'green')
+                return redirect('/login')
+            else:
+                flash('Username already exists!', 'red')
+                return render_template("signUp.html", form=form)
+    else:
+        return render_template("signUp.html", form=form)
 
 
 @app.route('/view')

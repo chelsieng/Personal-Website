@@ -1,0 +1,52 @@
+{% extends "home.html" %}
+{% block title %} Log In - CN {% endblock %}
+{% block content %}
+    <div class="card mx-auto d-block" style="width:50%">
+        <div class="card-header display-3 text-center"><img class="img-responsive" src="/static/images/signup.png">Sign
+            Up
+        </div>
+        <br>
+        <div class="container-lg mx-auto d-block">
+            <form class="card-body form-responsive" action="/signup" method="post">
+                {{ form.hidden_tag() }}
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div style="color:{{ category }}" class="text-center">{{ message }}</div><br>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user-edit"></i></span>
+                    </div>
+                    {{ form.signup_username(class="form-control", placeholder="Enter Username") }}
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user-lock"></i></span>
+                        </div>
+                        {{ form.signup_password(class="form-control", placeholder="Enter Password", id="signup_pwd1", onkeyup="validatePassword()") }}
+                        <div class="invalid-feedback">Warning! Password should contain at least:
+                            <ul>
+                                <li>6 characters,</li>
+                                <li>1 upper case,</li>
+                                <li>1 lower case,</li>
+                                <li>1 digit.</li>
+                            </ul>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user-shield"></i></span>
+
+                            </div>
+                            {{ form.signup_confirm_password(class="form-control", placeholder="Confirm Password", id="signup_pwd2", onkeyup="pwdEquals()") }}
+                            <div class="invalid-feedback">Warning! Password does not match.</div>
+                        </div>
+                        {{ form.signup_confirm_btn(id="submitSignUp",class="btn btn-dark mx-auto d-block", value="Sign Up", disabled=True) }}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -12,6 +12,39 @@ function validateEmail() {
     }
 }
 
+//When username already exists
+
+//Validating password from signup.html
+function validatePassword() {
+    //At least 6 character, 1 lower case, 1 upper case and 1 digit
+    const pwd_regex = /^(?=.*[A-z])(?=.*[A-Z])(?=.*[0-9])\S{6,}$/;
+    const pwd_input1 = document.getElementById("signup_pwd1");
+    pwd_input1.value = pwd_input1.value.trim();
+    if (pwd_regex.test(pwd_input1.value)) {
+        pwd_input1.className = "form-control is-valid";
+    } else {
+        pwd_input1.className = "form-control is-invalid";
+    }
+    pwdEquals();
+}
+
+//Validating equality of passwords
+function pwdEquals() {
+    const pwd_regex = /^(?=.*[A-z])(?=.*[A-Z])(?=.*[0-9])\S{6,}$/;
+    const pwd_input1 = document.getElementById("signup_pwd1");
+    const pwd_input2 = document.getElementById("signup_pwd2");
+    pwd_input1.value = pwd_input1.value.trim();
+    pwd_input2.value = pwd_input2.value.trim();
+    if ((pwd_input1.value === pwd_input2.value)) {
+        pwd_input2.className = "form-control is-valid";
+        if (pwd_regex.test(pwd_input2.value)) {
+            document.getElementById("submitSignUp").disabled = false;
+        }
+    } else {
+        pwd_input2.className = "form-control is-invalid";
+    }
+}
+
 //Displaying instagram feed
 var request = new XMLHttpRequest();
 request.open('GET', 'https://graph.instagram.com/me/media?fields=id,caption,media_url&access_token=IGQVJVbU1OVTdpeUJlRUpQX2hIYldFTXZAfMmdQWDAydW0tbTF4R3Q0UHNuSHJnbkVWY1dRUW5rMGFiN0ZAObWw4dk45Y2kwU3N0MW9pS2U0M3RIdFoxbnFtMjFpa3VFX1JHR2p6YWRB', true);
