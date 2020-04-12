@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import InputRequired
 from flask_sqlalchemy import SQLAlchemy
 
@@ -11,10 +11,24 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
 
+class SignUpForm(FlaskForm):
+    signup_username = StringField('signup_username', validators=[InputRequired()])
+    signup_password = PasswordField('signup_password01', validators=[InputRequired()])
+    signup_confirm_password = PasswordField('signup_password02', validators=[InputRequired()])
+    signup_confirm_btn = SubmitField('Sign Up')
+
+
+class ContactForm(FlaskForm):
+    name = StringField('name', validators=[InputRequired()])
+    email = StringField('email', validators=[InputRequired()])
+    message = TextAreaField('message', validators=[InputRequired()])
+    send = SubmitField('Send')
+
+
 class LoginForm(FlaskForm):
     username = StringField('username', validators=[InputRequired()])
     password = PasswordField('password', validators=[InputRequired()])
-    submit = SubmitField('Sign In')
+    submit = SubmitField('Log In')
 
 
 class ContactInfo(db.Model):
@@ -52,19 +66,20 @@ def moreAboutMe():
 
 @app.route('/contact', methods=["POST", "GET"])
 def contact():
+    form = ContactForm()
     if request.method == "POST":
-        name = request.form["name"]
-        email = request.form["email"]
-        message = request.form["message"]
-
-        user = ContactInfo(name, email, message)
-        db.session.add(user)
-        db.session.commit()
+        if form.validate_on_submit():
+            name = request.form["name"]
+            email = request.form["email"]
+            message = request.form["message"]
+            user = ContactInfo(name, email, message)
+            db.session.add(user)
+            db.session.commit()
 
         return redirect(url_for("thankyou", name=name, email=email, message=message))
 
     else:
-        return render_template("contact.html")
+        return render_template("contact.html", form=form)
 
 
 @app.route('/contact/thankyou/<name>/<email>/<message>')
@@ -128,7 +143,22 @@ def logIn():
     # if "username" in session:
     #     flash("You have been logged in!")
 
-    return render_template("logUser.html", form=form, message="Log in ")
+    return render_template("login.html", form=form)
+
+
+@app.route('/signup')
+def signup():
+    form = SignUpForm()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            signup_username = request.form["signup_username"]
+            signup_password = request.form["signup_password"]
+            signup_confirm_password = request.form["signup_confirm"]
+            log_user = UserInfo(signup_username, signup_password)
+            db.session.add(log_user)
+            db.session.commit()
+
+    return render_template("signUp.html", form=form)
 
 
 @app.route('/view')

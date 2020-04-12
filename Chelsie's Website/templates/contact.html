@@ -5,24 +5,22 @@
 
         <img class="img-responsive mx-auto d-block" src="/static/images/contact-128.png">
         <div class="text-center display-4">Contact Me</div>
-        <form class="form-responsive" action="#" method="post">
+        <form class="form-responsive" method="post">
+            {{ form.hidden_tag() }}
             <div class="row">
-                <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required>
+                {{ form.name(type="text",class="form-control", id="name" ,placeholder="Enter name") }}
             </div>
             <div class="row">
-                <input type="text" class="form-control" id="email" placeholder="Enter email" name="email"
-                       onchange="validateEmail()" required>
+                {{ form.email(type="text",class="form-control" ,id="email" ,placeholder="Enter email",
+                       onchange="validateEmail()") }}
                 <div class="invalid-feedback">Warning! Email entered invalid.</div>
             </div>
 
             <div class="row">
-                <textarea class="form-control" rows="10" id="message" placeholder="Enter message" name="message"
-                          required></textarea>
+                {{ form.message( class="form-control" ,rows="10" ,id="message" ,placeholder="Enter message") }}
             </div>
             <br>
-            <button type="submit" id="submit" value="submit" class="btn btn-dark mx-auto d-block" disabled> Send
-            </button>
-
+            {{ form.send( type="submit" ,id="submit" ,value="Send" ,class="btn btn-dark mx-auto d-block", disabled=True) }}
         </form>
     </div>
 {% endblock %}

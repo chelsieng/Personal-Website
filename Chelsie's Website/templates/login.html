@@ -1,0 +1,30 @@
+{% extends "home.html" %}
+{% block title %} Log In - CN {% endblock %}
+{% block content %}
+    <div class="card mx-auto d-block" style="width:50%">
+        <div class="card-header display-3 text-center"><img class="img-responsive" src="/static/images/login.png"> Log
+            In
+        </div>
+        <br>
+        <div class="container-lg mx-auto d-block">
+            <form class="card-body form-responsive" method="post">
+                {{ form.hidden_tag() }}
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    {{ form.username(size=32, class="form-control", placeholder="Username") }}
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        </div>
+                        {{ form.password(size=32, class="form-control", placeholder="Password") }}
+                    </div>
+                    <div class="input-group"><a href="/signup">Don't have a username yet?</a></div>
+                    {{ form.submit(id="submitLogin",class="btn btn-dark mx-auto d-block", value="Log In") }}
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
