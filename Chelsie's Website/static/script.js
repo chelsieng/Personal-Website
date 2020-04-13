@@ -57,5 +57,10 @@ function validatePost() {
     }
 }
 
+//Validating button from justforfun.html
+function button() {
+
+
+}
 
 
