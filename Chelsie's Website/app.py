@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session, template_rendered
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import InputRequired
@@ -9,6 +9,16 @@ app.secret_key = "Q5Y5tM4G8vDHav7z"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data/Database.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
+
+
+class PostForm(FlaskForm):
+    post = TextAreaField('post', validators=[InputRequired()])
+    post_submit = SubmitField('Post')
+
+
+class PlayForm(FlaskForm):
+    have_btn = SubmitField('I have')
+    have_not_btn = SubmitField('I have not')
 
 
 class SignUpForm(FlaskForm):
@@ -53,15 +63,16 @@ class UserInfo(db.Model):
         self.password = password
 
 
-def mySession(sender, **extra):
-    if "user" in session:
-        user = session["user"]
-        flash(user, 'fas fa-user-check')
-    else:
-        flash('LOG IN', 'fas fa-user-plus')
+class PostInfo(db.Model):
+    _id = db.Column("id", db.Integer, primary_key=True)
+    post = db.Column("Post", db.String)
+    have = db.Column("I have", db.Integer)
+    have_not = db.Column("I have not", db.Integer)
 
-
-template_rendered.connect(mySession, app)
+    def __init__(self, post, have, have_not):
+        self.post = post
+        self.have = have
+        self.have_not = have_not
 
 
 @app.route('/home')
@@ -86,6 +97,8 @@ def contact():
             user = ContactInfo(name, email, message)
             db.session.add(user)
             db.session.commit()
+
+            # query
 
         return redirect(url_for("thankyou", name=name, email=email, message=message))
 
@@ -113,9 +126,24 @@ def media():
     return render_template("media.html")
 
 
-@app.route('/makeyourday')
-def makeYourDay():
-    return render_template("makeYourDay.html")
+@app.route('/justforfun', methods=["POST", "GET"])
+def justForFun():
+    form = PostForm()
+    play = PlayForm()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            post = request.form["post"]
+            user_post = PostInfo.query.filter_by(post=post).first()
+            if user_post is None:
+                user = PostInfo(post, None, None)
+                db.session.add(user)
+                db.session.commit()
+                return redirect(url_for("justForFun"))
+            else:
+                flash('Post already exists!', 'red')
+                return render_template("justForFun.html", form=form, form1=play, values=PostInfo.query.all())
+
+    return render_template("justForFun.html", form=form, form1=play, values=PostInfo.query.all())
 
 
 @app.route('/logout')
@@ -156,7 +184,6 @@ def signup():
             signup_username = request.form["signup_username"]
             signup_confirm_password = request.form["signup_password"]
             signup_user = UserInfo.query.filter_by(username=signup_username).first()
-            print(signup_user)
             if signup_user is None:
                 log_user = UserInfo(signup_username, signup_confirm_password)
                 db.session.add(log_user)
@@ -172,7 +199,7 @@ def signup():
 
 @app.route('/view')
 def view():
-    return render_template("view.html", values=UserInfo.query.all())
+    return render_template("view.html", values=PostInfo.query.all())
 
 
 if __name__ == '__main__':

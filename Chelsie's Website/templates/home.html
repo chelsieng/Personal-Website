@@ -42,7 +42,7 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav nav-fill w-100">
                 <li class="nav-item">
-                    <a class="nav-link" href="/makeyourday">HOW CAN I MAKE YOUR DAY?</a>
+                    <a class="nav-link" href="/justforfun">JUST FOR FUN</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/project">PROJECTS</a>
@@ -58,23 +58,23 @@
                 </li>
                 {% if session["user"] %}
                     <li class="nav-item dropdown">
-                        {% with messages = get_flashed_messages(with_categories=true) %}
-                            {% if messages %}
-                                {% for category, message in messages %}
-                                    {% if message != "Logged out successfully!" and message!="Not logged in" %}
+{#                        {% with messages = get_flashed_messages(with_categories=true) %}#}
+{#                            {% if messages %}#}
+{#                                {% for category, message in messages %}#}
+{#                                    {% if message != "Logged out successfully!" and message!="Not logged in" %}#}
                                         <a class="nav-link dropdown-toggle" href="/login" id="navbardrop"
                                            data-toggle="dropdown">
-                                            <i class="{{ category }}"></i> <span
-                                                style="text-transform: capitalize">{{ message }}</span>
+                                            <i class="fas fa-user-check"></i> <span
+                                                style="text-transform: capitalize">{{ session["user"] }}</span>
                                         </a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="/logout"><i class="fas fa-user-times"></i>
                                                 <span style="text-transform: capitalize">LOG OUT</span></a>
                                         </div>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                        {% endwith %}
+{#                                    {% endif %}#}
+{#                                {% endfor %}#}
+{#                            {% endif %}#}
+{#                        {% endwith %}#}
                     </li>
                 {% else %}
                     <li class="nav-item ">

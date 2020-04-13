@@ -1,0 +1,89 @@
+{% extends "home.html" %}
+{% block title %} Just for Fun - CN {% endblock %}
+{% block content %}
+    {% if session["user"] %}
+        <div class="container py-5 container-lg mx-auto d-block">
+        <div class="display-3 text-center">Never Have I ever..
+        </div>
+        <ul class="nav nav-tabs nav-justified">
+            <li class="nav-item ">
+                <a class="nav-link active text-dark lead" data-toggle="tab" href="#play">Play</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark lead" data-toggle="tab" href="#create">Create New Post</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane bg-white fade show active" id="play">
+
+                <div>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <br>
+                                <div style="color: {{ category }}" class="text-center">{{ message }}</div><br>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <ul>
+                    {% for item in values | reverse %}
+                        <div class="card" style="border: none">
+                            <div class="card-body">
+
+                                <h4 class="card-title">
+                                    <li>{{ item.post }}</li>
+                                </h4>
+
+                                <div class="container" style="display:none">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                             style="width:40%">I have
+                                        </div>
+                                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                             style="width:60%">I haven't
+                                        </div>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div class="container container-lg">
+                                    <button type="button" id="have"
+                                            class="btn btn-large btn-outline-primary text-center">I
+                                        have
+                                    </button>
+                                    <button type="button" id="have_not"
+                                            class="btn btn-large btn-outline-success text-center">I have not
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    {% endfor %}
+                </ul>
+
+            </div>
+            <div class="tab-pane bg-white fade" id="create">
+                <div class="media border p-3">
+                    <img src="/static/images/anonymous.png" alt="John Doe" class="mr-3 mt-2 ">
+                    <div class="media-body">
+                        <h5>Anonymous</h5>
+                        <form class="form-responsive" action="" method="post">
+                            <div class="container">
+                                {{ form.hidden_tag() }}
+                                {{ form.post(class="form-control bg-light", rows="5", id="write", placeholder="Write something", onchange="validatePost()") }}
+                                <div class="invalid-feedback">You should start with "Never have I ever"</div>
+                                {{ form.post_submit( type="submit", id="post", value="Post" ,class="btn btn-dark", disabled=True) }}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% else %}
+        <div class="container py-5 container-lg mx-auto d-block">
+            <div class="display-3 text-center"> Haha, don't forget to log in first..
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

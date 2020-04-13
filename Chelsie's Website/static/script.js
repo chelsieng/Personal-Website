@@ -26,7 +26,7 @@ function validatePassword() {
     pwdEquals();
 }
 
-//Validating equality of passwords
+//Validating equality of passwords from signup.html
 function pwdEquals() {
     const pwd_regex = /^(?=.*[A-z])(?=.*[A-Z])(?=.*[0-9])\S{6,}$/;
     const pwd_input1 = document.getElementById("signup_pwd1");
@@ -40,6 +40,20 @@ function pwdEquals() {
         }
     } else {
         pwd_input2.className = "form-control is-invalid";
+    }
+}
+
+//Validating post from justForFun.html
+function validatePost() {
+    const post_regex =/^\b(\w*never have i ever\w*)\b/i;
+    const post = document.getElementById("write");
+    post.value = post.value.trim();
+    console.log(post.value)
+    if (post_regex.test(post.value)) {
+        post.className = "form-control is-valid";
+        document.getElementById("post").disabled = false;
+    } else {
+        post.className = "form-control is-invalid";
     }
 }
 
