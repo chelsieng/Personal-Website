@@ -12,7 +12,9 @@
                 {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
                         {% for category, message in messages %}
+                            {% if message != "LOG IN" %}
                             <div style="color: {{ category }}" class="text-center">{{ message }}</div><br>
+                            {% endif %}
                         {% endfor %}
                     {% endif %}
                 {% endwith %}

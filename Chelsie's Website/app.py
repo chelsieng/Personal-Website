@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, get_flashed_messages
+from flask import Flask, render_template, request, redirect, url_for, flash, session, template_rendered
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import InputRequired
@@ -51,6 +51,17 @@ class UserInfo(db.Model):
     def __init__(self, username, password):
         self.username = username
         self.password = password
+
+
+def mySession(sender, **extra):
+    if "user" in session:
+        user = session["user"]
+        flash(user, 'fas fa-user-check')
+    else:
+        flash('LOG IN', 'fas fa-user-plus')
+
+
+template_rendered.connect(mySession, app)
 
 
 @app.route('/home')
@@ -107,6 +118,17 @@ def makeYourDay():
     return render_template("makeYourDay.html")
 
 
+@app.route('/logout')
+def logOut():
+    if "user" in session:
+        session.clear()
+        flash('Logged out successfully!', 'green')
+        return redirect(url_for("logIn"))
+    else:
+        flash('Not logged in', 'red')
+        return redirect(url_for("logIn"))
+
+
 @app.route('/login', methods=["POST", "GET"])
 def logIn():
     form = LoginForm()
@@ -116,9 +138,13 @@ def logIn():
             password = request.form["password"]
             user = UserInfo.query.filter_by(username=username).first()
             if user and user.password == password:
-                return redirect('/home')
+                session["user"] = username
+                return render_template("home.html")
             else:
                 flash('Log in unsuccessful!', 'red')
+    else:
+        if "user" in session:
+            return redirect(url_for("home"))
     return render_template("login.html", form=form)
 
 

@@ -1,5 +1,6 @@
 {% extends "home.html" %}
 {% block title %} Project - CN {% endblock %}
+<script type="text/javascript" src="{{ url_for('static', filename='projectAPI.js') }}"></script>
 {% block content %}
     <div class="container-fluid mx-auto d-block pt-5">
         <div class="display-4 text-center">GitHub Profile</div>
@@ -11,4 +12,6 @@
             my <a href="https://github.com/chelsieng?tab=repositories" class="alert-link">git repositories!</a>
         </div>
     </div>
+        <div id="user-repositories">
+        </div>
 {% endblock %}

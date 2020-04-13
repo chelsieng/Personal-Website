@@ -56,9 +56,31 @@
                 <li class="nav-item ">
                     <a class="nav-link" href="/contact">CONTACT ME</a>
                 </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="/login"><i class="fas fa-user-plus"></i> LOG IN</a>
-                </li>
+                {% if session["user"] %}
+                    <li class="nav-item dropdown">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    {% if message != "Logged out successfully!" and message!="Not logged in" %}
+                                        <a class="nav-link dropdown-toggle" href="/login" id="navbardrop"
+                                           data-toggle="dropdown">
+                                            <i class="{{ category }}"></i> <span
+                                                style="text-transform: capitalize">{{ message }}</span>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="/logout"><i class="fas fa-user-times"></i>
+                                                <span style="text-transform: capitalize">LOG OUT</span></a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </li>
+                {% else %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/login"><i class="fas fa-user-plus"></i> LOG IN</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </nav>
@@ -76,6 +98,14 @@
             color: white;
         }
     </style>
+    <script>
+        window.onload = function () {
+            if (!window.location.hash) {
+                window.location = window.location + '#loaded';
+                window.location.reload();
+            }
+        }
+    </script>
     <div class="container-lg mx-auto d-block">
         <p class="display-4 text-center"> Welcome, I'm Chelsie!</p>
         <p class="lead text-center"><i class="fas fa-birthday-cake"></i> Born on December 18th, 1999</p>
