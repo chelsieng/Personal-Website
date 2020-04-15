@@ -47,20 +47,13 @@ function pwdEquals() {
 function validatePost() {
     const post_regex =/^\b(\w*never have i ever\w*)\b/i;
     const post = document.getElementById("write");
-    post.value = post.value.trim();
-    console.log(post.value)
-    if (post_regex.test(post.value)) {
+    var text = post.value.trim();
+    if (post_regex.test(text)) {
         post.className = "form-control is-valid";
         document.getElementById("post").disabled = false;
     } else {
         post.className = "form-control is-invalid";
     }
-}
-
-//Validating button from justforfun.html
-function button() {
-
-
 }
 
 

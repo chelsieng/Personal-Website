@@ -17,6 +17,7 @@ class PostForm(FlaskForm):
 
 
 class PlayForm(FlaskForm):
+    play_post = StringField('play_post', validators=[InputRequired()])
     have_btn = SubmitField('I have')
     have_not_btn = SubmitField('I have not')
 
@@ -42,7 +43,7 @@ class LoginForm(FlaskForm):
 
 
 class ContactInfo(db.Model):
-    _id = db.Column("id", db.Integer, primary_key=True)
+    _id = db.Column("id", db.Integer, primary_key=True, autoincrement=True)
     name = db.Column("Name", db.String)
     email = db.Column("Email", db.String)
     message = db.Column("Message", db.String)
@@ -52,9 +53,13 @@ class ContactInfo(db.Model):
         self.email = email
         self.message = message
 
+    @property
+    def id(self):
+        return self._id
+
 
 class UserInfo(db.Model):
-    _id = db.Column("id", db.Integer, primary_key=True)
+    _id = db.Column("id", db.Integer, primary_key=True, autoincrement=True)
     username = db.Column("Username", db.String)
     password = db.Column("Password", db.String)
 
@@ -64,7 +69,7 @@ class UserInfo(db.Model):
 
 
 class PostInfo(db.Model):
-    _id = db.Column("id", db.Integer, primary_key=True)
+    _id = db.Column("id", db.Integer, primary_key=True, autoincrement=True)
     post = db.Column("Post", db.String)
     have = db.Column("I have", db.Integer)
     have_not = db.Column("I have not", db.Integer)
@@ -97,8 +102,11 @@ def contact():
             user = ContactInfo(name, email, message)
             db.session.add(user)
             db.session.commit()
-
-            # query
+            user_id = user.id
+            user_info = ContactInfo.query.filter_by(_id=user_id).first()
+            name = user_info.name
+            email = user_info.email
+            message = user_info.message
 
         return redirect(url_for("thankyou", name=name, email=email, message=message))
 
@@ -130,20 +138,81 @@ def media():
 def justForFun():
     form = PostForm()
     play = PlayForm()
-    if request.method == "POST":
-        if form.validate_on_submit():
-            post = request.form["post"]
-            user_post = PostInfo.query.filter_by(post=post).first()
-            if user_post is None:
-                user = PostInfo(post, None, None)
-                db.session.add(user)
-                db.session.commit()
-                return redirect(url_for("justForFun"))
-            else:
-                flash('Post already exists!', 'red')
-                return render_template("justForFun.html", form=form, form1=play, values=PostInfo.query.all())
-
-    return render_template("justForFun.html", form=form, form1=play, values=PostInfo.query.all())
+    have = request.form.get('have_btn')
+    have_not = request.form.get('have_not_btn')
+    post_submit = request.form.get('post_submit')
+    db_dict = PostInfo.query.all()
+    print(request.form)
+    if "play" in session:
+        if request.method == "POST":
+            if form.validate_on_submit():
+                if post_submit == "Post":
+                    post = request.form["post"]
+                    user_post = PostInfo.query.filter_by(post=post).first()
+                    if user_post is None:
+                        user = PostInfo(post, 0, 0)
+                        db.session.add(user)
+                        db.session.commit()
+                        return redirect(url_for("justForFun"))
+                    else:
+                        flash('Post already exists!', 'red')
+            if play.validate_on_submit():
+                post_vote = request.form["play_post"]
+                if have == "I Have":
+                    user_have = PostInfo.query.filter_by(post=post_vote).first()
+                    user_have.have += 1
+                    db.session.commit()
+                    db_dict = PostInfo.query.all()
+                    playlist = session["play"]
+                    playlist.append(user_have._id)
+                    session["play"] = playlist
+                    for item in db_dict:
+                        if item._id == user_have._id or (item._id in session["play"]):
+                            item.display = 'block'
+                            item.disable = True
+                        elif not (item._id in session["play"]):
+                            item.display = 'none'
+                            item.disable = False
+                        if item.have == 0 and item.have_not == 0:
+                            item.havePercentage = 0
+                            item.haveNotPercentage = 0
+                        else:
+                            item.havePercentage = (item.have / (item.have + item.have_not)) * 100
+                            item.haveNotPercentage = (item.have_not / (item.have + item.have_not)) * 100
+                elif have_not == "I Have Not":
+                    user_have_not = PostInfo.query.filter_by(post=post_vote).first()
+                    user_have_not.have_not += 1
+                    db.session.commit()
+                    db_dict = PostInfo.query.all()
+                    playlist = session["play"]
+                    playlist.append(user_have_not._id)
+                    session["play"] = playlist
+                    for item in db_dict:
+                        if item._id == user_have_not._id or (item._id in session["play"]):
+                            item.display = 'block'
+                            item.disable = True
+                        elif not (item._id in session["play"]):
+                            item.display = 'none'
+                            item.disable = False
+                        if item.have == 0 and item.have_not == 0:
+                            item.havePercentage = 0
+                            item.haveNotPercentage = 0
+                        else:
+                            item.havePercentage = (item.have / (item.have + item.have_not)) * 100
+                            item.haveNotPercentage = (item.have_not / (item.have + item.have_not)) * 100
+        else:
+            for item in db_dict:
+                if not (item._id in session["play"]):
+                    item.display = "none"
+                    item.disable = False
+                    item.haveNotPercentage = 0
+                    item.havePercentage = 0
+                else:
+                    item.display = 'block'
+                    item.disable = True
+                    item.havePercentage = (item.have / (item.have + item.have_not)) * 100
+                    item.haveNotPercentage = (item.have_not / (item.have + item.have_not)) * 100
+    return render_template("justForFun.html", form=form, form1=play, values=db_dict)
 
 
 @app.route('/logout')
@@ -167,6 +236,7 @@ def logIn():
             user = UserInfo.query.filter_by(username=username).first()
             if user and user.password == password:
                 session["user"] = username
+                session["play"] = []
                 return render_template("home.html")
             else:
                 flash('Log in unsuccessful!', 'red')
