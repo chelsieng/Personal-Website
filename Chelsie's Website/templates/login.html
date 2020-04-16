@@ -1,38 +1,45 @@
 {% extends "home.html" %}
 {% block title %} Log In - CN {% endblock %}
 {% block content %}
-    <div class="card mx-auto d-block" style="width:50%">
-        <div class="card-header display-3 text-center"><img class="img-responsive" src="/static/images/login.png"> Log
-            In
-        </div>
-        <br>
-        <div class="container-lg mx-auto d-block">
-            <form class="card-body form-responsive" method="post">
-                {{ form.hidden_tag() }}
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                            {% if message != "LOG IN" %}
-                                <div style="color: {{ category }}" class="text-center">{{ message }}</div><br>
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-user"></i></span>
-                    </div>
-                    {{ form.username(class="form-control", placeholder="Username") }}
+    <div class="container-fluid mx-auto d-block pt-5 pb-5">
+        <div class="card card-responsive mx-auto d-block " style="width:auto">
+            <div class="card-header display-3 text-center"><img class="img-responsive" src="/static/images/login.png">Log
+                In
+            </div>
+            <br>
+            <div class="container-lg mx-auto d-block">
+                <form class="card-body form-responsive" method="post">
+                    {{ form.hidden_tag() }}
+                    {#  displaying log in unsuccessful, log out successful, sign up successful message #}
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                {% if message != "LOG IN" %}
+                                    <div style="color: {{ category }}" class="text-center">{{ message }}</div><br>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        {{ form.password(class="form-control", placeholder="Password") }}
+                        {# username field #}
+                        {{ form.username(class="form-control", placeholder="Username") }}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            </div>
+                            {# password field #}
+                            {{ form.password(class="form-control", placeholder="Password") }}
+                        </div>
+                        {# link to sign up form #}
+                        <div class="input-group"><a href="/signup">Don't have a username yet?</a></div>
+                        {# log in button #}
+                        {{ form.submit(id="submitLogin",class="btn btn-dark mx-auto d-block", value="Log In") }}
                     </div>
-                    <div class="input-group"><a href="/signup">Don't have a username yet?</a></div>
-                    {{ form.submit(id="submitLogin",class="btn btn-dark mx-auto d-block", value="Log In") }}
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

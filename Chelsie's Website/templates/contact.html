@@ -2,25 +2,28 @@
 {% block title %} Contact Me - CN {% endblock %}
 {% block content %}
     <div class="container-lg pt-3 pb-5 mx-auto d-block">
-
         <img class="img-responsive mx-auto d-block" src="/static/images/contact-128.png">
         <div class="text-center display-4">Contact Me</div>
         <form class="form-responsive" method="post">
             {{ form.hidden_tag() }}
             <div class="row">
+                {# Name field #}
                 {{ form.name(type="text",class="form-control", id="name" ,placeholder="Enter name") }}
             </div>
             <div class="row">
-                {{ form.email(type="text",class="form-control" ,id="email" ,placeholder="Enter email",
-                       onchange="validateEmail()") }}
+                {# email field #}
+                {{ form.email(type="text",class="form-control" ,id="email" ,placeholder="Enter email", onchange="validateEmail()") }}
+                {# if email is invalid #}
                 <div class="invalid-feedback">Warning! Email entered invalid.</div>
             </div>
 
             <div class="row">
+                {# message field #}
                 {{ form.message( class="form-control", rows="10" ,id="message" ,placeholder="Enter message") }}
             </div>
             <br>
-            {{ form.send( type="submit" ,id="submit" ,value="Send" ,class="btn btn-dark mx-auto d-block", disabled=True) }}
+            {# send button #}
+            {{ form.send( type="submit" ,id="submit" ,value="Send" ,class="btn btn-dark mx-auto d-block", disabled=True, onclick="callScriptFunction()") }}
         </form>
     </div>
 {% endblock %}

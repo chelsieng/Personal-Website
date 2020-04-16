@@ -5,9 +5,14 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Home Page - CN{% endblock %}</title>
-        {#        <link rel="icon" href="https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-512.png">#}
+        {# icon title #}
+        <link rel="icon"
+              href="/static/images/C.png">
+        {# javascript file #}
         <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+        {#  style sheet #}
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename ='stylesheet.css') }}">
+        {# bootstrap #}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
               crossorigin="anonymous">
@@ -35,7 +40,7 @@
 <body>
 {% block navbarHeader %}
     <nav class="navbar navbar-expand-lg fixed-top">
-        <a class="navbar-brand text-align-center " href="/home">「 𝐂 𝐇 𝐄 𝐋 𝐒 𝐈 𝐄 」</a> <!-- Add image -->
+        <a class="navbar-brand text-align-center " href="/home">「 𝐂 𝐇 𝐄 𝐋 𝐒 𝐈 𝐄 」</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"><img src="/static/images/Toggler.png"></span>
         </button>
@@ -56,27 +61,21 @@
                 <li class="nav-item ">
                     <a class="nav-link" href="/contact">CONTACT ME</a>
                 </li>
+                {#  show user is log in and log out link when user is in session #}
                 {% if session["user"] %}
                     <li class="nav-item dropdown">
-{#                        {% with messages = get_flashed_messages(with_categories=true) %}#}
-{#                            {% if messages %}#}
-{#                                {% for category, message in messages %}#}
-{#                                    {% if message != "Logged out successfully!" and message!="Not logged in" %}#}
-                                        <a class="nav-link dropdown-toggle" href="/login" id="navbardrop"
-                                           data-toggle="dropdown">
-                                            <i class="fas fa-user-check"></i> <span
-                                                style="text-transform: capitalize">{{ session["user"] }}</span>
-                                        </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="/logout"><i class="fas fa-user-times"></i>
-                                                <span style="text-transform: capitalize">LOG OUT</span></a>
-                                        </div>
-{#                                    {% endif %}#}
-{#                                {% endfor %}#}
-{#                            {% endif %}#}
-{#                        {% endwith %}#}
+                        <a class="nav-link dropdown-toggle" href="/login" id="navbardrop"
+                           data-toggle="dropdown">
+                            <i class="fas fa-user-check"></i> <span
+                                style="text-transform: capitalize">{{ session["user"] }}</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/logout"><i class="fas fa-user-times"></i>
+                                <span style="text-transform: capitalize">LOG OUT</span></a>
+                        </div>
                     </li>
                 {% else %}
+                    {# show log in link when user is not in session #}
                     <li class="nav-item ">
                         <a class="nav-link" href="/login"><i class="fas fa-user-plus"></i> LOG IN</a>
                     </li>
@@ -98,15 +97,16 @@
             color: white;
         }
     </style>
-    <script>
-        window.onload = function () {
-            if (!window.location.hash) {
-                window.location = window.location + '#loaded';
-                window.location.reload();
-            }
-        }
-    </script>
-    <div class="container-lg mx-auto d-block">
+{#    <script>#}
+        {# refresh page #}
+{#        window.onload = function () {#}
+{#            if (!window.location.hash) {#}
+{#                window.location = window.location + '#loaded';#}
+{#                window.location.reload();#}
+{#            }#}
+{#        }#}
+{#    </script>#}
+    <div class="container-lg mx-auto d-block pt-3">
         <p class="display-4 text-center"> Welcome, I'm Chelsie!</p>
         <p class="lead text-center"><i class="fas fa-birthday-cake"></i> Born on December 18th, 1999</p>
         <p class="lead text-center"><i class="fas fa-university"></i> Student at Concordia University</p>

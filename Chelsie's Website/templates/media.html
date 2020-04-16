@@ -1,6 +1,7 @@
 {% extends "home.html" %}
 {% block title %} Media - CN {% endblock %}
 {% block content %}
+    {# intagram api #}
     <script type="text/javascript" src="{{ url_for('static', filename='mediaAPI.js') }}"></script>
     <div class="container py-5 container-lg mx-auto d-block">
         <div class="display-3 text-center"><img class="img-responsive" src="/static/images/media.png"> Media</div>
@@ -14,10 +15,12 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane bg-white fade show active" id="photos">
+                {# displaying instagram pictures #}
                 <div id="instafeed"></div>
             </div>
             <div class="tab-pane bg-white gitfade" id="videos">
                 <div class="container container-sm container-md container-lg">
+                    {# displaying facebook videos #}
                     <div id="fb-root"></div>
                     <script async defer crossorigin="anonymous"
                             src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0&appId=216701929430972&autoLogAppEvents=1"></script>

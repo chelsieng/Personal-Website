@@ -8,15 +8,15 @@ request.onload = function (container) {
         let data = JSON.parse(request.responseText);
         for (let i = 0; i < data.data.length; i++) {
             let container = document.getElementById('instafeed');
-            let imgURL = data.data[i].media_url;
+            let imgURL = data.data[i].media_url; //Getting ig post url
             let div = document.createElement('div');
             div.setAttribute('class', 'container container-sm container-md container-lg');
-            container.appendChild(div);
+            container.appendChild(div); //<div class="container container-sm container-md container-lg"></div>
             let img = document.createElement('img');
             img.setAttribute('src', imgURL);
             img.setAttribute('class', 'img-fluid img-thumbnail')
             img.setAttribute('width', '1080')
-            div.appendChild(img);
+            div.appendChild(img); //<img src="imgURL" class="img-fluid img-thumbnail" width="1080">
         }
     } else {
     }

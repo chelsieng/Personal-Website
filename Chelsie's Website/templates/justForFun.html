@@ -1,7 +1,90 @@
 {% extends "home.html" %}
 {% block title %} Just for Fun - CN {% endblock %}
 {% block content %}
+    {# when user is logged in #}
     {% if session["user"] %}
+        <div class="container py-5 container-lg mx-auto d-block">
+        <div class="display-3 text-center"> Never Have I ever..
+        </div>
+        <ul class="nav nav-tabs nav-justified">
+            <li class="nav-item ">
+                <a class="nav-link active text-dark lead" data-toggle="tab" href="#play">Play</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark lead" data-toggle="tab" href="#create">Create New Post</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane bg-white fade show active" id="play">
+                <div>
+                    {# displaying message if post already exists #}
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <br>
+                                <div style="color: {{ category }}" class="text-center">{{ message }}</div><br>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <ul>
+                    {# displaying from most recent post to least recent post #}
+                    {% for item in values | reverse %}
+                        <div class="card" style="border: none">
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    {#  Displaying post from database  #}
+                                    <li>{{ item.post }}</li>
+                                </h4>
+                                {# displaying calculated progressing bar when user clicks on have or have not button #}
+                                <div class="container" id="display" style="display:{{ item.display }}">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                             style="width:{{ item.havePercentage }}%">I have
+                                        </div>
+                                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                             style="width:{{ item.haveNotPercentage }}%">I haven't
+                                        </div>
+                                    </div>
+                                    <br>
+                                </div>
+                                <form class="form-responsive" action="" method="post">
+                                    {{ form1.hidden_tag() }}
+                                    {# Post related to buttons #}
+                                    {{ form1.play_post(style="display:none", id="playpost",type="text", value = item.post) }}
+                                    {# have button #}
+                                    {{ form1.have_btn(type="submit",id="have", class="btn btn-large btn-outline-primary text-center", value="I Have", onclick="disableButton()", disabled=item.disable) }}
+                                    {# have not button #}
+                                    {{ form1.have_not_btn(type="submit",id="have_not",class="btn btn-large btn-outline-success text-center", value="I Have Not", onclick="disableButton()", disabled= item.disable ) }}
+                                </form>
+                            </div>
+                        </div>
+                        <hr>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="tab-pane bg-white fade" id="create">
+                <div class="media border p-3">
+                    <img src="/static/images/anonymous.png" class="mr-3 mt-2 ">
+                    <div class="media-body">
+                        <h5>Anonymous</h5>
+                        <form class="form-responsive" action="" method="post">
+                            <div class="container">
+                                {{ form.hidden_tag() }}
+                                {# post field #}
+                                {{ form.post(class="form-control bg-light", rows="5", id="write", placeholder="Write something", onkeydown="validatePost()") }}
+                                {# if post is invalid #}
+                                <div class="invalid-feedback">You should start with "Never have I ever"</div>
+                                {# post button #}
+                                {{ form.post_submit( type="submit", id="post", value="Post" ,class="btn btn-dark", disabled=True) }}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {# when user is not logged in #}
+    {% else %}
         <div class="container py-5 container-lg mx-auto d-block">
         <div class="display-3 text-center">Never Have I ever..
         </div>
@@ -32,7 +115,8 @@
                                 <h4 class="card-title">
                                     <li>{{ item.post }}</li>
                                 </h4>
-                                <div class="container" id="display" style="display:{{ item.display }}">
+                                {# calculated results not displayed #}
+                                <div class="container" id="display" style="display:none">
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-striped progress-bar-animated"
                                              style="width:{{ item.havePercentage }}%">I have
@@ -46,8 +130,9 @@
                                 <form class="form-responsive" action="" method="post">
                                     {{ form1.hidden_tag() }}
                                     {{ form1.play_post(style="display:none", id="playpost",type="text", value = item.post) }}
-                                    {{ form1.have_btn(type="submit",id="have", class="btn btn-large btn-outline-primary text-center", value="I Have", onclick="disableButton()", disabled=item.disable) }}
-                                    {{ form1.have_not_btn(type="submit",id="have_not",class="btn btn-large btn-outline-success text-center", value="I Have Not", onclick="disableButton()", disabled= item.disable ) }}
+                                    {# buttons disabled on click #}
+                                    {{ form1.have_btn(type="submit",id="have", class="btn btn-large btn-outline-primary text-center", value="I Have", onclick="promptLogIn()", disabled=False) }}
+                                    {{ form1.have_not_btn(type="submit",id="have_not",class="btn btn-large btn-outline-success text-center", value="I Have Not", onclick="promptLogIn()", disabled= False) }}
                                 </form>
                             </div>
                         </div>
@@ -65,41 +150,10 @@
                                 {{ form.hidden_tag() }}
                                 {{ form.post(class="form-control bg-light", rows="5", id="write", placeholder="Write something", onkeydown="validatePost()") }}
                                 <div class="invalid-feedback">You should start with "Never have I ever"</div>
-                                {{ form.post_submit( type="submit", id="post", value="Post" ,class="btn btn-dark", disabled=True) }}
+                                {# button disabled on click #}
+                                {{ form.post_submit( type="submit", id="post", value="Post" ,class="btn btn-dark", disabled=False, onclick="promptLogIn()") }}
                             </div>
                         </form>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    {% else %}
-        <div class="container py-5 container-lg mx-auto d-block">
-        <div class="display-3 text-center">Never Have I ever..
-        </div>
-        <ul class="nav nav-tabs nav-justified">
-            <li class="nav-item ">
-                <a class="nav-link active text-dark lead" data-toggle="tab" href="#play">Play</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark lead" data-toggle="tab" href="#create">Create New Post</a>
-            </li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane bg-white fade show active" id="play">
-                <div class="media border p-3">
-                    <br>
-                    <br>
-
-                    <div class="display-4 text-center">Haha, don't forget to log in first..
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane bg-white fade" id="create">
-                <div class="media border p-3">
-                    <br>
-                    <br>
-                    <div class="display-4 text-center">Haha, don't forget to log in first..
                     </div>
                 </div>
 
