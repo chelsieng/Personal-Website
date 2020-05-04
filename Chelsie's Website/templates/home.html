@@ -9,9 +9,9 @@
         <link rel="icon"
               href="/static/images/C.png">
         {# javascript file #}
-        <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='javascript/script.js') }}"></script>
         {#  style sheet #}
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename ='stylesheet.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename ='css/stylesheet.css') }}">
         {# bootstrap #}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -97,20 +97,11 @@
             color: white;
         }
     </style>
-{#    <script>#}
-        {# refresh page #}
-{#        window.onload = function () {#}
-{#            if (!window.location.hash) {#}
-{#                window.location = window.location + '#loaded';#}
-{#                window.location.reload();#}
-{#            }#}
-{#        }#}
-{#    </script>#}
     <div class="container-lg mx-auto d-block pt-3">
         <p class="display-4 text-center"> Welcome, I'm Chelsie!</p>
         <p class="lead text-center"><i class="fas fa-birthday-cake"></i> Born on December 18th, 1999</p>
         <p class="lead text-center"><i class="fas fa-university"></i> Student at Concordia University</p>
-        <p class="lead text-center text-decoration-none"><i
+        <p class="lead text-center text-decoration-none" style="outline-color: red"><i
                 class="fas fa-info-circle"></i> <a style="color: white" href="\learnmoreaboutme">Learn more about me</a>
         </p>
     </div>

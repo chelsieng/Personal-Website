@@ -27,41 +27,39 @@
                         {% endif %}
                     {% endwith %}
                 </div>
-                <ul>
-                    {# displaying from most recent post to least recent post #}
+                {# displaying from most recent post to least recent post #}
+                <div class="card">
                     {% for item in values | reverse %}
-                        <div class="card" style="border: none">
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    {#  Displaying post from database  #}
-                                    <li>{{ item.post }}</li>
-                                </h4>
-                                {# displaying calculated progressing bar when user clicks on have or have not button #}
-                                <div class="container" id="display" style="display:{{ item.display }}">
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                             style="width:{{ item.havePercentage }}%">I have
-                                        </div>
-                                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
-                                             style="width:{{ item.haveNotPercentage }}%">I haven't
-                                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                {#  Displaying post from database  #}
+                                {{ item.post }}
+                            </h4>
+                            {# displaying calculated progressing bar when user clicks on have or have not button #}
+                            <div class="container" id="display" style="display:{{ item.display }}">
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         style="width:{{ item.havePercentage }}%">I have
                                     </div>
-                                    <br>
+                                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                         style="width:{{ item.haveNotPercentage }}%">I haven't
+                                    </div>
                                 </div>
-                                <form class="form-responsive" action="" method="post">
-                                    {{ form1.hidden_tag() }}
-                                    {# Post related to buttons #}
-                                    {{ form1.play_post(style="display:none", id="playpost",type="text", value = item.post) }}
-                                    {# have button #}
-                                    {{ form1.have_btn(type="submit",id="have", class="btn btn-large btn-outline-primary text-center", value="I Have", onclick="disableButton()", disabled=item.disable) }}
-                                    {# have not button #}
-                                    {{ form1.have_not_btn(type="submit",id="have_not",class="btn btn-large btn-outline-success text-center", value="I Have Not", onclick="disableButton()", disabled= item.disable ) }}
-                                </form>
+                                <br>
                             </div>
+                            <form class="form-responsive" action="" method="post">
+                                {{ form1.hidden_tag() }}
+                                {# Post related to buttons #}
+                                {{ form1.play_post(style="display:none", id="playpost",type="text", value = item.post) }}
+                                {# have button #}
+                                {{ form1.have_btn(type="submit",id="have", class="btn btn-large btn-outline-primary text-center", value="I Have", onclick="disableButton()", disabled=item.disable) }}
+                                {# have not button #}
+                                {{ form1.have_not_btn(type="submit",id="have_not",class="btn btn-large btn-outline-success text-center", value="I Have Not", onclick="disableButton()", disabled= item.disable ) }}
+                            </form>
                         </div>
                         <hr>
                     {% endfor %}
-                </ul>
+                </div>
             </div>
             <div class="tab-pane bg-white fade" id="create">
                 <div class="media border p-3">
@@ -108,37 +106,35 @@
                         {% endif %}
                     {% endwith %}
                 </div>
-                <ul>
+                <div class="card">
                     {% for item in values | reverse %}
-                        <div class="card" style="border: none">
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <li>{{ item.post }}</li>
-                                </h4>
-                                {# calculated results not displayed #}
-                                <div class="container" id="display" style="display:none">
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                             style="width:{{ item.havePercentage }}%">I have
-                                        </div>
-                                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
-                                             style="width:{{ item.haveNotPercentage }}%">I haven't
-                                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                {{ item.post }}
+                            </h4>
+                            {# calculated results not displayed #}
+                            <div class="container" id="display" style="display:none">
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         style="width:{{ item.havePercentage }}%">I have
                                     </div>
-                                    <br>
+                                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                         style="width:{{ item.haveNotPercentage }}%">I haven't
+                                    </div>
                                 </div>
-                                <form class="form-responsive" action="" method="post">
-                                    {{ form1.hidden_tag() }}
-                                    {{ form1.play_post(style="display:none", id="playpost",type="text", value = item.post) }}
-                                    {# buttons disabled on click #}
-                                    {{ form1.have_btn(type="submit",id="have", class="btn btn-large btn-outline-primary text-center", value="I Have", onclick="promptLogIn()", disabled=False) }}
-                                    {{ form1.have_not_btn(type="submit",id="have_not",class="btn btn-large btn-outline-success text-center", value="I Have Not", onclick="promptLogIn()", disabled= False) }}
-                                </form>
+                                <br>
                             </div>
+                            <form class="form-responsive" action="" method="post">
+                                {{ form1.hidden_tag() }}
+                                {{ form1.play_post(style="display:none", id="playpost",type="text", value = item.post) }}
+                                {# buttons disabled on click #}
+                                {{ form1.have_btn(type="submit",id="have", class="btn btn-large btn-outline-primary text-center", value="I Have", onclick="promptLogIn()", disabled=False) }}
+                                {{ form1.have_not_btn(type="submit",id="have_not",class="btn btn-large btn-outline-success text-center", value="I Have Not", onclick="promptLogIn()", disabled= False) }}
+                            </form>
                         </div>
                         <hr>
                     {% endfor %}
-                </ul>
+                </div>
             </div>
             <div class="tab-pane bg-white fade" id="create">
                 <div class="media border p-3">

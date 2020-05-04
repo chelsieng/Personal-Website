@@ -1,7 +1,7 @@
 body {
     padding-top: 5%;
     padding-bottom: 5%;
-    background-image: url("../static/images/background.jpg");
+    background-image: url("/static/images/background.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;

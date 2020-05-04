@@ -184,16 +184,17 @@ def justForFun():
                 if post_submit == "Post":
                     post = request.form["post"]
                     # getting post from database
-                    user_post = PostInfo.query.filter_by(post=post).first()
+                    user_post = PostInfo.query.filter_by(post=post.strip()).first()
                     # when post does not exists, add in database
                     if user_post is None:
-                        user = PostInfo(post, 0, 0)
+                        user = PostInfo(post.strip(), 0, 0)
                         db.session.add(user)
                         db.session.commit()
                         return redirect(url_for("justForFun"))
                     # when post already exists, flash message
                     else:
                         flash('Post already exists!', 'red')
+                        return redirect(url_for("justForFun"))
             if play.validate_on_submit():
                 post_vote = request.form["play_post"]
                 # when user clicks I have button
@@ -212,6 +213,8 @@ def justForFun():
                         if item._id == user_have._id or (item._id in session["play"]):
                             item.display = 'block'
                             item.disable = True
+                            item.havePercentage = (item.have / (item.have + item.have_not)) * 100
+                            item.haveNotPercentage = (item.have_not / (item.have + item.have_not)) * 100
                         # when player press button for related post for the first time in session, enable button
                         elif not (item._id in session["play"]):
                             item.display = 'none'
@@ -220,8 +223,8 @@ def justForFun():
                         if item.have == 0 and item.have_not == 0:
                             item.havePercentage = 0
                             item.haveNotPercentage = 0
+                        # calculating have% and havenot% button clicked
                         else:
-                            # calculating have% and havenot% button clicked
                             item.havePercentage = (item.have / (item.have + item.have_not)) * 100
                             item.haveNotPercentage = (item.have_not / (item.have + item.have_not)) * 100
                 # when user clicks I have not button
@@ -237,6 +240,8 @@ def justForFun():
                         if item._id == user_have_not._id or (item._id in session["play"]):
                             item.display = 'block'
                             item.disable = True
+                            item.havePercentage = (item.have / (item.have + item.have_not)) * 100
+                            item.haveNotPercentage = (item.have_not / (item.have + item.have_not)) * 100
                         elif not (item._id in session["play"]):
                             item.display = 'none'
                             item.disable = False
@@ -259,7 +264,6 @@ def justForFun():
                     item.disable = True
                     item.havePercentage = (item.have / (item.have + item.have_not)) * 100
                     item.haveNotPercentage = (item.have_not / (item.have + item.have_not)) * 100
-
     return render_template("justForFun.html", form=form, form1=play, values=db_dict)
 
 
@@ -324,6 +328,10 @@ def signup():
 
 @app.route('/view')
 def view():
+    # deleting row in database
+    # obj = PostInfo.query.filter_by(_id=5).first()
+    # db.session.delete(obj)
+    # db.session.commit()
     return render_template("view.html", values=PostInfo.query.all())
 
 
