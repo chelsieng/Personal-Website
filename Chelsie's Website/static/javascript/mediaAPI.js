@@ -1,6 +1,6 @@
 //Displaying instagram feed
 var request = new XMLHttpRequest();
-request.open('GET', 'https://graph.instagram.com/me/media?fields=id,caption,media_url&access_token=IGQVJYWmh5dk82TUZACMDNEbnJraTF5d2JIVkhENFluN1VabmNsenBDWTZAtNXcyWWhCb0ZAPN3R6YXVPVTBGQnF4NEFlMVJqZAEpKeXBjeUt1TDFjRDBQaVUzVmZAkMlRNZAGlZAdTA4TkIxNHpfUUV0c3dDTQZDZD', true);
+request.open('GET', 'https://graph.instagram.com/me/media?fields=id,caption,media_url&access_token=IGQVJVdmtOS24zZAF9LelMwVlFDQlB1VjdKQk5vc3dfOGNnOVFUWWJheGpndVJkMTdaUTdIOWRjakNsUkJPN2pVTGotMm8zQjd2Tml5QXRSd3RkQXZAyZAV8yVUFGYnowLWlaTXlXSDN1aERPb1hvdWE3NAZDZD', true);
 
 request.onload = function (container) {
     if (request.status >= 200 && request.status < 400) {
